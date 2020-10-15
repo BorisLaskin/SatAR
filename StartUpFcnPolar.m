@@ -1,0 +1,156 @@
+function handles=StartUpFcnPolar(handles)
+uipanelwidth=0.98;
+uipanelheight=0.94;
+uipanelx=0.01;
+uipanely=0.01;
+togglebwidth=0.1;
+togglebheight=0.05;
+fonttype.buttons=handles.preferences.fonttype.buttons;
+fonttype.subpanel=handles.preferences.fonttype.subpanel;
+fonttype.axes=handles.preferences.fonttype.axes;
+fonttype.text=handles.preferences.fonttype.text;
+fonttype.matrix=handles.preferences.fonttype.matrix;
+fontsize.buttons=handles.preferences.fontsize.buttons;
+fontsize.subpanel=handles.preferences.fontsize.subpanel;
+fontsize.axes=handles.preferences.fontsize.axes;
+fontsize.text=handles.preferences.fontsize.text;
+fontsize.matrix=handles.preferences.fontsize.matrix;
+%||-----------------------uippolar-------------------------------------
+set(handles.uippolar,'Units','normalized','Position',[uipanelx,uipanely,uipanelwidth,uipanelheight]);
+set(handles.uippolar,'BackgroundColor',handles.preferences.color.panel);
+set(handles.uippolar,'Title','Частотно-поляризационное разделение','TitlePosition','righttop');
+set(handles.uippolar,'FontName',fonttype.subpanel,'FontSize',fontsize.subpanel);
+%|||----------------------tbpolar--------------------------------
+set(handles.tbpolar,'BackgroundColor',handles.preferences.color.tabs(1,:));
+set(handles.tbpolar,'Units','normalized','Position',[0.21,0.95,togglebwidth,togglebheight]);
+set(handles.tbpolar,'String','Облучатели');
+set(handles.tbpolar,'FontName',fonttype.buttons,'FontSize',fontsize.buttons);
+axdx=0.58;
+axdy=0.85;
+axX=0.05;
+axY=0.1;
+%|||----------------------uipbeactiv1---------------------------------
+uipsubpdx=0.64;uipsubpdy=0.485;
+set(handles.uipbeactiv1,'Units','normalized','Position',[0.01,0.01,uipsubpdx,uipsubpdy]);
+set(handles.uipbeactiv1,'BackgroundColor',handles.preferences.color.subpanel);
+set(handles.uipbeactiv1,'Title','Включить/Выключить облучатель');
+set(handles.uipbeactiv1,'FontName',fonttype.subpanel,'FontSize',fontsize.subpanel);
+%||||----------------------elements---------------------------------
+set(handles.axklactiv1,'Units','normalized','Position',[axX,axY,axdx,axdy]);
+set(handles.axklactiv1,'FontName',fonttype.axes,'FontSize',fontsize.axes);
+set(handles.axklactiv1,'XTickLabel',[],'YTickLabel',[]);
+%axes(handles.axklactiv1);
+%box on;
+set(handles.uiton_off,'Units','normalized','Position',[0.76,axY,0.22,axdy]);
+dataactiv=[];
+set(handles.uiton_off,'Data',dataactiv','ColumnName',{'Вкл/Выкл'});
+set(handles.uiton_off,'ColumnEditable',logical([1]));
+set(handles.uiton_off,'FontName',fonttype.matrix,'FontSize',fontsize.matrix);
+set(handles.pbonall,'Units','normalized','Position',[0.66,0.85,0.09,0.1]);
+set(handles.pbonall,'String','Вкл. все');
+set(handles.pbonall,'FontName',fonttype.buttons,'FontSize',fontsize.buttons);
+set(handles.pboffall,'Units','normalized','Position',[0.66,0.74,0.09,0.1]);
+set(handles.pboffall,'String','Выкл. все');
+set(handles.pboffall,'FontName',fonttype.buttons,'FontSize',fontsize.buttons);
+%|||----------------------uipchosepolar------------------------------
+set(handles.uipchousepolar,'Units','normalized','Position',[0.01,0.505,uipsubpdx,uipsubpdy]);
+set(handles.uipchousepolar,'BackgroundColor',handles.preferences.color.subpanel);
+set(handles.uipchousepolar,'Title','Частотно поляризационное разделение');
+set(handles.uipchousepolar,'FontName',fonttype.subpanel,'FontSize',fontsize.subpanel);
+%||||----------------------elements---------------------------------
+set(handles.axklactivpolar,'Units','normalized','Position',[axX,axY,axdx,axdy]);
+set(handles.axklactivpolar,'FontName',fonttype.axes,'FontSize',fontsize.axes);
+set(handles.axklactivpolar,'XTickLabel',[],'YTickLabel',[]);
+%axes(handles.axklactivpolar);
+%box on;
+set(handles.uipactivpolar,'Units','normalized','Position',[0.66,0.4,0.32,0.55]);
+set(handles.uipactivpolar,'BackgroundColor',handles.preferences.color.subpanel);
+set(handles.uipactivpolar,'Title','Назначить для всех излучателей');
+set(handles.uipactivpolar,'FontName',fonttype.subpanel,'FontSize',fontsize.subpanel);
+set(handles.rbT,'Units','normalized','Position',[0.01,0.9,0.98,0.1]);
+set(handles.rbT,'String','Гор. (F1)');
+set(handles.rbT,'FontName',fonttype.buttons,'FontSize',fontsize.buttons);
+set(handles.rbL,'Units','normalized','Position',[0.01,0.8,0.98,0.1]);
+set(handles.rbL,'String','Верт. (F1)');
+set(handles.rbL,'FontName',fonttype.buttons,'FontSize',fontsize.buttons);
+set(handles.rbTF,'Units','normalized','Position',[0.01,0.7,0.98,0.1]);
+set(handles.rbTF,'String','Гор. (F2)');
+set(handles.rbTF,'FontName',fonttype.buttons,'FontSize',fontsize.buttons);
+set(handles.rbLF,'Units','normalized','Position',[0.01,0.6,0.98,0.1]);
+set(handles.rbLF,'String','Верт. (F2)');
+set(handles.rbLF,'FontName',fonttype.buttons,'FontSize',fontsize.buttons);
+set(handles.rbF1F2TL,'Units','normalized','Position',[0.01,0.5,0.98,0.1]);
+set(handles.rbF1F2TL,'String',{'Верт. - Гор. (F1 - F2)'});
+set(handles.rbF1F2TL,'FontName',fonttype.buttons,'FontSize',fontsize.buttons);
+set(handles.rbF1F2LT,'Units','normalized','Position',[0.01,0.4,0.98,0.1]);
+set(handles.rbF1F2LT,'String',{'Верт. - Гор. (F2 - F1)'});
+set(handles.rbF1F2LT,'FontName',fonttype.buttons,'FontSize',fontsize.buttons);
+
+
+tdx=0.2;tdy=0.05;tY=0.1;
+set(handles.pbpolarhelp,'Units','normalized','Position',[0.66,tY+4*tdy,2*tdx,2*tdy]);
+set(handles.pbpolarhelp,'String','Помощь');
+set(handles.pbpolarhelp,'FontName',fonttype.buttons,'FontSize',fontsize.buttons);
+set(handles.pbpolarhelp,'Visible','off');
+set(handles.tF1T,'Units','normalized','Position',[0.66,tY+3*tdy,tdx,tdy]);
+set(handles.tF1T,'BackgroundColor',handles.preferences.color.polar(1,:));
+set(handles.tF1T,'FontName',fonttype.text,'FontSize',fontsize.text);
+set(handles.tF1T,'String','F1 - горизонтальная','HorizontalAlignment','left');
+set(handles.tF1L,'Units','normalized','Position',[0.66,tY+2*tdy,tdx,tdy]);
+set(handles.tF1L,'BackgroundColor',handles.preferences.color.polar(2,:));
+set(handles.tF1L,'FontName',fonttype.text,'FontSize',fontsize.text);
+set(handles.tF1L,'String','F1 - вертикальная','HorizontalAlignment','left');
+set(handles.tF2T,'Units','normalized','Position',[0.66,tY+tdy,tdx,tdy]);
+set(handles.tF2T,'BackgroundColor',handles.preferences.color.polar(3,:));
+set(handles.tF2T,'FontName',fonttype.text,'FontSize',fontsize.text);
+set(handles.tF2T,'String','F2 - горизонтальная','HorizontalAlignment','left');
+set(handles.tF2L,'Units','normalized','Position',[0.66,tY,tdx,tdy]);
+set(handles.tF2L,'BackgroundColor',handles.preferences.color.polar(4,:));
+set(handles.tF2L,'FontName',fonttype.text,'FontSize',fontsize.text);
+set(handles.tF2L,'String','F2 - вертикальная','HorizontalAlignment','left');
+set(handles.tF1Cr,'Units','normalized','Position',[0.66+tdx,tY+3*tdy,tdx,tdy]);
+set(handles.tF1Cr,'BackgroundColor',handles.preferences.color.polar(5,:));
+set(handles.tF1Cr,'FontName',fonttype.text,'FontSize',fontsize.text);
+set(handles.tF1Cr,'Visible','off');
+set(handles.tF1Cl,'Units','normalized','Position',[0.66+tdx,tY+2*tdy,tdx,tdy]);
+set(handles.tF1Cl,'BackgroundColor',handles.preferences.color.polar(6,:));
+set(handles.tF1Cl,'FontName',fonttype.text,'FontSize',fontsize.text);
+set(handles.tF1Cl,'Visible','off');
+set(handles.tF2Cr,'Units','normalized','Position',[0.66+tdx,tY+tdy,tdx,tdy]);
+set(handles.tF2Cr,'BackgroundColor',handles.preferences.color.polar(7,:));
+set(handles.tF2Cr,'FontName',fonttype.text,'FontSize',fontsize.text);
+set(handles.tF2Cr,'Visible','off');
+set(handles.tF2Cl,'Units','normalized','Position',[0.66+tdx,tY,tdx,tdy]);
+set(handles.tF2Cl,'BackgroundColor',handles.preferences.color.polar(8,:));
+set(handles.tF2Cl,'FontName',fonttype.text,'FontSize',fontsize.text);
+set(handles.tF2Cl,'Visible','off');
+%|||----------------------uipphase----------------------------------
+set(handles.uipphase,'Units','normalized','Position',[0.83,0.01,0.16,0.98]);
+set(handles.uipphase,'BackgroundColor',handles.preferences.color.subpanel);
+set(handles.uipphase,'Title','Задержка фазы');
+set(handles.uipphase,'FontName',fonttype.subpanel,'FontSize',fontsize.subpanel);
+set(handles.uipphase,'Visible','off');
+%||||----------------------uitphase----------------------------------
+set(handles.uitphase,'Units','normalized','Position',[0.05,0.08,0.9,0.91]);
+dataphase=[];
+set(handles.uitphase,'Data',dataphase','ColumnName',{'Сдвиг,рад'});
+set(handles.uitphase,'ColumnEditable',logical([1]));
+set(handles.uitphase,'FontName',fonttype.matrix,'FontSize',fontsize.matrix);
+set(handles.pbzerophase,'Units','normalized','Position',[0.05,0.01,0.9,0.06]);
+set(handles.pbzerophase,'String','Фаза ноль для всех');
+set(handles.pbzerophase,'FontName',fonttype.buttons,'FontSize',fontsize.buttons);
+%|||----------------------uipampl----------------------------------
+set(handles.uipampl,'Units','normalized','Position',[0.66,0.01,0.171,0.98]);
+set(handles.uipampl,'BackgroundColor',handles.preferences.color.subpanel);
+set(handles.uipampl,'Title','Амплитудное распределение');
+set(handles.uipampl,'FontName',fonttype.subpanel,'FontSize',fontsize.subpanel);
+%||||----------------------uitampl----------------------------------
+set(handles.uitampl,'Units','normalized','Position',[0.05,0.08,0.9,0.91]);
+dataampl=[];
+set(handles.uitampl,'Data',dataampl','ColumnName',{'Амплитуда'});
+set(handles.uitampl,'ColumnEditable',logical([1]));
+set(handles.uitampl,'FontName',fonttype.matrix,'FontSize',fontsize.matrix);
+set(handles.pboneampl,'Units','normalized','Position',[0.05,0.01,0.9,0.056]);
+set(handles.pboneampl,'String','Выравнять амплитуду');
+set(handles.pboneampl,'FontName',fonttype.buttons,'FontSize',fontsize.buttons);
+end
